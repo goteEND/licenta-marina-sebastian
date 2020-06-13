@@ -16,7 +16,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["msg"],
-  computed: mapGetters(["user"], ["isLoggedIn"]),
+  computed: mapGetters(["user"]),
   methods: {
     ...mapActions(["getProfile"]),
     ...mapActions(["logout"]),
