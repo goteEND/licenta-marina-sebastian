@@ -9,17 +9,6 @@
         <div class="card-body">
           <form @submit.prevent="registerUser">
             <div class="form-group">
-              <label for="username">Username</label>
-              <input
-                id="username"
-                type="text"
-                placeholder="Username"
-                name="username"
-                v-model="username"
-                class="form-control"
-              >
-            </div>
-            <div class="form-group">
               <label for="name">Name</label>
               <input
                 id="name"
@@ -28,7 +17,7 @@
                 name="name"
                 v-model="name"
                 class="form-control"
-              >
+              />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
@@ -39,7 +28,7 @@
                 name="email"
                 v-model="email"
                 class="form-control"
-              >
+              />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
@@ -50,7 +39,7 @@
                 name="password"
                 id="password"
                 v-model="password"
-              >
+              />
             </div>
             <div class="form-group">
               <label for="confirm_password">Confirm Password</label>
@@ -61,11 +50,13 @@
                 name="confirm_password"
                 id="confirm_password"
                 v-model="confirm_password"
-              >
+              />
             </div>
             <button class="btn btn-primary">Register</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <router-link to="/login" class="card-link">Already have an account?</router-link>
+            <router-link to="/login" class="card-link"
+              >Already have an account?</router-link
+            >
           </form>
         </div>
       </div>
@@ -78,10 +69,9 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      username: "",
+      name: "",
       password: "",
       confirm_password: "",
-      name: "",
       email: ""
     };
   },
@@ -89,10 +79,9 @@ export default {
     ...mapActions(["register"]),
     registerUser() {
       let user = {
-        username: this.username,
+        email: this.email,
         password: this.password,
         confirm_password: this.confirm_password,
-        email: this.email,
         name: this.name
       };
       this.register(user).then(res => {

@@ -12,22 +12,12 @@ const User = require("../../model/User");
  * @access Public
  */
 router.post("/register", (req, res) => {
-  let { name, username, email, password, confirm_password } = req.body;
+  let { name, email, password, confirm_password } = req.body;
   if (password !== confirm_password) {
     return res.status(400).json({
       msg: "Password do not match."
     });
   }
-  // Check for the unique Username
-  User.findOne({
-    username: username
-  }).then(user => {
-    if (user) {
-      return res.status(400).json({
-        msg: "Username is already taken."
-      });
-    }
-  });
   // Check for the Unique Email
   User.findOne({
     email: email
@@ -41,7 +31,6 @@ router.post("/register", (req, res) => {
   // The data is valid and new we can register the user
   let newUser = new User({
     name,
-    username,
     password,
     email
   });
@@ -67,11 +56,11 @@ router.post("/register", (req, res) => {
  */
 router.post("/login", (req, res) => {
   User.findOne({
-    username: req.body.username
+    email: req.body.email
   }).then(user => {
     if (!user) {
       return res.status(404).json({
-        msg: "Username is not found.",
+        msg: "Email is not found.",
         success: false
       });
     }
@@ -81,9 +70,8 @@ router.post("/login", (req, res) => {
         // User's password is correct and we need to send the JSON Token for that user
         const payload = {
           _id: user._id,
-          username: user.username,
-          name: user.name,
-          email: user.email
+          email: user.email,
+          name: user.name
         };
         jwt.sign(
           payload,

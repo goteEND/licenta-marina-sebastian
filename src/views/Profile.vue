@@ -4,7 +4,6 @@
     <div class="card" v-if="user">
       <ul class="list-group">
         <li class="list-group-item">Email: {{ user.email }}</li>
-        <li class="list-group-item">Username: {{ user.username }}</li>
         <li class="list-group-item">Name: {{ user.name }}</li>
       </ul>
     </div>
@@ -24,5 +23,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
