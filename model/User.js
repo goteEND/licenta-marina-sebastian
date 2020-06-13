@@ -15,10 +15,16 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    default: "student"
+  },
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  profesor: { type: String },
+  year: { type: String }
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

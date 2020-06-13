@@ -13,6 +13,13 @@ const User = require("../../model/User");
  */
 router.post("/register", (req, res) => {
   let { name, email, password, confirm_password } = req.body;
+  // Min Password
+  if (password < 8) {
+    return res.status(400).json({
+      msg: "Password too short"
+    });
+  }
+  // Match Passwords
   if (password !== confirm_password) {
     return res.status(400).json({
       msg: "Password do not match."
@@ -71,7 +78,8 @@ router.post("/login", (req, res) => {
         const payload = {
           _id: user._id,
           email: user.email,
-          name: user.name
+          name: user.name,
+          role: user.role
         };
         jwt.sign(
           payload,

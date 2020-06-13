@@ -6,6 +6,7 @@
       <ul class="list-group">
         <li class="list-group-item">Email: {{ user.email }}</li>
         <li class="list-group-item">Name: {{ user.name }}</li>
+        <li class="list-group-item">Role: {{ user.role }}</li>
         <v-btn @click.prevent="logoutUser">Logout</v-btn>
       </ul>
     </div>
