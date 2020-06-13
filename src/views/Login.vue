@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Login</h2>
+    {{ msg }}
     <div class="row">
       <div class="card mx-auto">
         <div class="card-header text-white bg-primary">
@@ -45,6 +46,7 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+  props: ["msg"],
   data() {
     return {
       email: "",

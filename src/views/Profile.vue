@@ -1,10 +1,12 @@
 <template>
   <div>
     <h2>Profile</h2>
+    {{ msg }}
     <div class="card" v-if="user">
       <ul class="list-group">
         <li class="list-group-item">Email: {{ user.email }}</li>
         <li class="list-group-item">Name: {{ user.name }}</li>
+        <v-btn @click.prevent="logoutUser">Logout</v-btn>
       </ul>
     </div>
   </div>
@@ -13,9 +15,14 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
-  computed: mapGetters(["user"]),
+  props: ["msg"],
+  computed: mapGetters(["user"], ["isLoggedIn"]),
   methods: {
-    ...mapActions(["getProfile"])
+    ...mapActions(["getProfile"]),
+    ...mapActions(["logout"]),
+    logoutUser() {
+      this.logout();
+    }
   },
   created() {
     this.getProfile();
