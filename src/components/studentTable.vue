@@ -25,7 +25,9 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
+  computed: mapGetters(["user"]),
   data() {
     return {
       loading: true,
@@ -38,11 +40,15 @@ export default {
       ]
     };
   },
-  async created() {
-    const students = await axios.get("api/studentTable");
-    if (students.data) {
-      this.students = students.data;
-      this.loading = false;
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      axios.get("api/studentTable").then(response => {
+        this.students = response.data;
+        this.loading = false;
+      });
     }
   }
 };

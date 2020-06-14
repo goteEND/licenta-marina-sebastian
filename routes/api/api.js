@@ -16,18 +16,6 @@ router.get("/users", async (req, res) => {
   });
 });
 
-// Profesor Table
-router.get("/profesorTable", async (req, res) => {
-  await User.find({ role: "student" }, (err, result) => {
-    // console.log(err, result);
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(result);
-    }
-  }).select("title year profesor name");
-});
-
 // Stundent Table
 router.get("/studentTable", async (req, res) => {
   await User.find({ role: "student" }, (err, result) => {
@@ -38,6 +26,33 @@ router.get("/studentTable", async (req, res) => {
       res.json(result);
     }
   }).select("title year profesor");
+});
+
+// Admin Table
+router.get("/adminTable", async (req, res) => {
+  await User.find({ role: "student" }, (err, result) => {
+    // console.log(err, result);
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  }).select("title year name email");
+});
+
+// Profesor Table
+router.get("/profesorTable", async (req, res) => {
+  await User.find(
+    { role: "student", profesor: req.query.prof.replace("_", " ") },
+    (err, result) => {
+      // console.log(err, result);
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    }
+  ).select("title year name email");
 });
 
 // Api Select Profesor Year and Title
