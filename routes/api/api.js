@@ -6,7 +6,7 @@ const Post = require("../../model/Post");
 
 // Api Get Users
 router.get("/users", async (req, res) => {
-  await User.find({}, (err, result) => {
+  await User.find({ role: "student" }, (err, result) => {
     // console.log(err, result);
     if (err) {
       res.send(err);
@@ -19,12 +19,13 @@ router.get("/users", async (req, res) => {
 // Api Select Profesor and Year
 
 router.post("/users", async (req, res) => {
-  const update = { profesor: req.body.profesor, an: req.body.year };
-  // console.log(req.body);
+  const { _id, profesor, anPrezentare, titluPrezentare } = req.body;
 
   await User.findByIdAndUpdate(
-    { _id: req.body.id },
-    { $set: { profesor: update.profesor, an: update.year } },
+    { _id: _id },
+    {
+      $set: { profesor: profesor, year: anPrezentare, title: titluPrezentare }
+    },
     { new: true },
     function(err, result) {
       if (err) {
@@ -50,10 +51,10 @@ router.get("/userChoice", async (req, res) => {
 });
 
 router.post("/userChoice", async (req, res) => {
-  const { nume, profesor, anPrezentare, titluPrezentare } = req.body;
-  console.log(profesor);
+  const { _id, nume, profesor, anPrezentare, titluPrezentare } = req.body;
   await Post.create(
     {
+      idOfStudent: _id,
       name: nume,
       title: titluPrezentare,
       year: anPrezentare,

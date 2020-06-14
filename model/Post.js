@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
+  idOfStudent: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true

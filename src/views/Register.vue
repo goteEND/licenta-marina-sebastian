@@ -66,7 +66,6 @@
                 <v-btn color="primary" :disabled="!valid" @click="validate"
                   >Inregistrare</v-btn
                 >
-                <v-btn color="primary" @click="registerUser">Test</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

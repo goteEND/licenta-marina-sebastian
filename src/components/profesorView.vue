@@ -38,13 +38,16 @@ export default {
       search: "",
       headers: [
         {
-          text: "Name",
+          text: "Nume",
           align: "start",
           sortable: false,
           value: "name"
         },
-        { text: "Role", value: "role" },
-        { text: "Email", value: "email" }
+        { text: "Profesor", value: "profesor" },
+        { text: "An", value: "year" },
+        { text: "Titlu", value: "title" }
+        // { text: "Role", value: "role" },
+        // { text: "Email", value: "email" }
       ]
     };
   },

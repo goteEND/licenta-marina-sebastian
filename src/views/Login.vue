@@ -42,7 +42,6 @@
                 <v-btn :disabled="!valid" @click="validate" color="primary"
                   >Autentificare</v-btn
                 >
-                <v-btn @click="loginUser" color="primary">Test</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

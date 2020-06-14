@@ -14,7 +14,7 @@ const User = require("../../model/User");
 router.post("/register", (req, res) => {
   let { name, email, password, confirm_password } = req.body;
   // Min Password
-  if (password < 8) {
+  if (password.length < 8) {
     return res.status(400).json({
       msg: "Password too short"
     });
@@ -39,7 +39,10 @@ router.post("/register", (req, res) => {
   let newUser = new User({
     name,
     password,
-    email
+    email,
+    profesor: " ",
+    title: " ",
+    year: " "
   });
   // Hash the password
   bcrypt.genSalt(10, (err, salt) => {
@@ -75,17 +78,21 @@ router.post("/login", (req, res) => {
     bcrypt.compare(req.body.password, user.password).then(isMatch => {
       if (isMatch) {
         // User's password is correct and we need to send the JSON Token for that user
+
         const payload = {
           _id: user._id,
           email: user.email,
           name: user.name,
-          role: user.role
+          role: user.role,
+          profesor: user.profesor,
+          title: user.title,
+          year: user.year
         };
         jwt.sign(
           payload,
           process.env.SECRET,
           {
-            expiresIn: 604800
+            expiresIn: 60 * 60 * 12
           },
           (err, token) => {
             res.status(200).json({

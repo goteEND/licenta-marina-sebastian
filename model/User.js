@@ -24,7 +24,8 @@ const UserSchema = new Schema({
     default: Date.now
   },
   profesor: { type: String },
-  year: { type: String }
+  year: { type: String },
+  title: { type: String }
 });
 
 module.exports = User = mongoose.model("users", UserSchema);
