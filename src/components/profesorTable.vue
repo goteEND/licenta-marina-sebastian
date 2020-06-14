@@ -40,8 +40,8 @@ export default {
           sortable: false,
           value: "name"
         },
-        { text: "An", value: "year" },
         { text: "Titlu", value: "title" },
+        { text: "An", value: "year" },
         { text: "Email", value: "email", sortable: false }
         // { text: "Role", value: "role" },
         // { text: "Email", value: "email" }
