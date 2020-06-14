@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-const User = require("../models/user");
-const Post = require("../models/post");
+const User = require("../../model/User");
+const Post = require("../../model/Post");
 
 // Api Get Users
 router.get("/users", async (req, res) => {
@@ -50,13 +50,14 @@ router.get("/userChoice", async (req, res) => {
 });
 
 router.post("/userChoice", async (req, res) => {
-  const { title } = req.body;
+  const { nume, profesor, anPrezentare, titluPrezentare } = req.body;
+  console.log(profesor);
   await Post.create(
     {
-      name: req.user.name,
-      title: title,
-      year: req.user.year,
-      profesor: req.user.profesor
+      name: nume,
+      title: titluPrezentare,
+      year: anPrezentare,
+      profesor: profesor
     },
     function(err, result) {
       if (err) {
