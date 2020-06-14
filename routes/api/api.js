@@ -16,7 +16,31 @@ router.get("/users", async (req, res) => {
   });
 });
 
-// Api Select Profesor and Year
+// Profesor Table
+router.get("/profesorTable", async (req, res) => {
+  await User.find({ role: "student" }, (err, result) => {
+    // console.log(err, result);
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  }).select("title year profesor name");
+});
+
+// Stundent Table
+router.get("/studentTable", async (req, res) => {
+  await User.find({ role: "student" }, (err, result) => {
+    // console.log(err, result);
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  }).select("title year profesor");
+});
+
+// Api Select Profesor Year and Title
 
 router.post("/users", async (req, res) => {
   const { _id, profesor, anPrezentare, titluPrezentare } = req.body;

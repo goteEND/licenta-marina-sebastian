@@ -1,5 +1,6 @@
-<template v-if="user.role === 'profesor'">
-  <v-app id="login">
+<!-- <template v-if="user.role === 'profesor'"> -->
+<template>
+  <v-app id="studentView">
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -19,15 +20,18 @@
                       <v-col cols="12" md="4">
                         <h2 v-if="user.profesor === ' '">Cont nesetat</h2>
                         <h3 v-if="user.profesor === ' '">
-                          Va rugam completati formularele urmatoare
+                          Va rugam completati formularul urmator
                         </h3>
-                        <h2>
+                        <h2 v-if="user.profesor !== ' '">
+                          <v-icon>mdi-account</v-icon>
                           {{ user.profesor }}
                         </h2>
-                        <h3>
+                        <h3 class="my-2" v-if="user.profesor !== ' '">
+                          <v-icon>mdi-calendar</v-icon>
                           {{ user.year }}
                         </h3>
-                        <h2>
+                        <h2 v-if="user.profesor !== ' '">
+                          <v-icon>mdi-fountain-pen-tip</v-icon>
                           {{ user.title }}
                         </h2>
                       </v-col>
@@ -65,7 +69,6 @@
                           >
                         </v-card-actions>
                       </v-col>
-                      <v-col cols="12" md="4">Fisier</v-col>
                     </v-row>
                     <v-row>
                       <v-col>
@@ -95,7 +98,7 @@
 <script>
 import studentTable from "./studentTable.vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   computed: mapGetters(["user"]),
   components: { studentTable },

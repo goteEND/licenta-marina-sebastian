@@ -1,62 +1,56 @@
+<!--<template>
+  <v-app id="profesorView">
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="8">
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>{{ user.name }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <h1>DADADA</h1>
+                <profesorTable />
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
+</template> -->
 <template>
-  <div>
-    <p>Profesor View Reached</p>
-    <div v-if="students">
-      <v-card>
-        <v-card-title>
-          Utilizatori
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Cautare"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title>
-        <v-data-table
-          :headers="headers"
-          :items="students"
-          :items-per-page="10"
-          class="elevation-1"
-          :loading="loading"
-          :search="search"
-        >
-        </v-data-table>
-      </v-card>
-    </div>
-  </div>
+  <v-app id="profesorView">
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="8">
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-toolbar-title>{{ user.name }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <profesorTable />
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
+import profesorTable from "./profesorTable.vue";
 import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  components: { profesorTable },
+  computed: mapGetters(["user"]),
   data() {
-    return {
-      loading: true,
-      students: null,
-      search: "",
-      headers: [
-        {
-          text: "Nume",
-          align: "start",
-          sortable: false,
-          value: "name"
-        },
-        { text: "Profesor", value: "profesor" },
-        { text: "An", value: "year" },
-        { text: "Titlu", value: "title" }
-        // { text: "Role", value: "role" },
-        // { text: "Email", value: "email" }
-      ]
-    };
-  },
-  async created() {
-    const students = await axios.get("api/users");
-    if (students.data) {
-      this.students = students.data;
-      this.loading = false;
-    }
+    return {};
   }
 };
 </script>

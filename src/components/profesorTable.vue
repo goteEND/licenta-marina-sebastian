@@ -1,7 +1,7 @@
 <template>
-  <v-card class="fill-width">
+  <v-card>
     <v-card-title>
-      Alte lucrari
+      Utilizatori
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -15,9 +15,9 @@
       :headers="headers"
       :items="students"
       :items-per-page="5"
-      class="elevation-1"
       :loading="loading"
       :search="search"
+      class="elevation-1"
     >
     </v-data-table>
   </v-card>
@@ -32,14 +32,22 @@ export default {
       students: [],
       search: "",
       headers: [
-        { text: "Titlu", value: "title" },
+        {
+          text: "Nume",
+          align: "start",
+          sortable: false,
+          value: "name"
+        },
         { text: "Profesor", value: "profesor" },
-        { text: "An", value: "year" }
+        { text: "An", value: "year" },
+        { text: "Titlu", value: "title" }
+        // { text: "Role", value: "role" },
+        // { text: "Email", value: "email" }
       ]
     };
   },
   async created() {
-    const students = await axios.get("api/studentTable");
+    const students = await axios.get("api/profesorTable");
     if (students.data) {
       this.students = students.data;
       this.loading = false;
