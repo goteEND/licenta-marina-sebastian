@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.requiresGuest)) {
     if (store.getters.isLoggedIn) {
       // Redirect to the Login Page
-      next("/profile");
+      next("/dashboard");
     } else {
       next();
     }

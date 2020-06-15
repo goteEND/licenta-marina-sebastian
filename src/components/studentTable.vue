@@ -35,7 +35,7 @@ export default {
       search: "",
       headers: [
         { text: "Titlu", value: "title" },
-        { text: "Profesor", value: "profesor" },
+        { text: "Coordonator", value: "profesor" },
         { text: "An", value: "year" }
       ]
     };

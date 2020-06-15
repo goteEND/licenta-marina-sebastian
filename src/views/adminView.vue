@@ -1,16 +1,16 @@
 <template>
-  <v-app id="profesorView">
+  <v-app id="adminView">
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>{{ user.name }}</v-toolbar-title>
+                <v-toolbar-title>{{ user.name }} - ADMIN</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <profesorTable />
+                <adminTable />
               </v-card-text>
             </v-card>
           </v-col>
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import profesorTable from "./profesorTable.vue";
+import adminTable from "../components/adminTable.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  components: { profesorTable },
+  components: { adminTable },
   computed: mapGetters(["user"]),
   data() {
     return {};

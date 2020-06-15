@@ -18,7 +18,7 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12" md="4">
-                        <h2 v-if="user.profesor === ' '">Cont nesetat</h2>
+                        <h2 v-if="user.profesor === ' '">Formular</h2>
                         <h3 v-if="user.profesor === ' '">
                           Va rugam completati formularul urmator
                         </h3>
@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import studentTable from "./studentTable.vue";
+import studentTable from "../components/studentTable.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -115,6 +115,7 @@ export default {
       "Ralf Fabian",
       "Neamtu Mircea",
       "Pitic Alina",
+      "Simian Dana",
       "Stoica Florin",
       "Stoica Laura"
     ],

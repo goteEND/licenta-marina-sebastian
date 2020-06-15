@@ -14,6 +14,10 @@ if (token) {
   Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
 }
 
+// JSON to Excel
+import JsonExcel from "vue-json-excel";
+Vue.component("downloadExcel", JsonExcel);
+
 new Vue({
   el: "#app",
   store,

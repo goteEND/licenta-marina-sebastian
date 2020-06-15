@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      Utilizatori
+      Studenti
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -20,14 +20,35 @@
       class="elevation-1"
     >
     </v-data-table>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <download-excel
+        :data="excel_data"
+        :fields="excel_fields"
+        name="situatie.xls"
+        worksheet="situatie"
+      >
+        <v-btn color="primary">Generare situatie</v-btn>
+      </download-excel>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
+  computed: mapGetters(["user"]),
   data() {
     return {
+      excel_fields: {
+        Nume: "name",
+        Titlu: "title",
+        Coordonator: "profesor",
+        An: "year",
+        Email: "email"
+      },
+      excel_data: [],
       loading: true,
       students: [],
       search: "",
@@ -38,20 +59,23 @@ export default {
           sortable: false,
           value: "name"
         },
-        { text: "An", value: "year" },
         { text: "Titlu", value: "title" },
+        { text: "Coordonator", value: "profesor" },
+        { text: "An", value: "year" },
         { text: "Email", value: "email", sortable: false }
-        // { text: "Role", value: "role" },
-        // { text: "Email", value: "email" }
       ]
     };
   },
-  async mounted() {
-    const students = await axios.get("api/profesorTable?prof=Ralf_Fabian");
-    console.log(this.user);
-    if (students.data) {
-      this.students = students.data;
-      this.loading = false;
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      axios.get(`api/adminTable`).then(response => {
+        this.students = response.data;
+        this.excel_data = response.data;
+        this.loading = false;
+      });
     }
   }
 };

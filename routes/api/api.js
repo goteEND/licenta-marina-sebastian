@@ -18,14 +18,17 @@ router.get("/users", async (req, res) => {
 
 // Stundent Table
 router.get("/studentTable", async (req, res) => {
-  await User.find({ role: "student" }, (err, result) => {
-    // console.log(err, result);
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(result);
+  await User.find(
+    { role: "student", profesor: { $ne: " " } },
+    (err, result) => {
+      // console.log(err, result);
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
     }
-  }).select("title year profesor");
+  ).select("title year profesor");
 });
 
 // Admin Table
@@ -37,7 +40,7 @@ router.get("/adminTable", async (req, res) => {
     } else {
       res.json(result);
     }
-  }).select("title year name email");
+  }).select("title year name email profesor");
 });
 
 // Profesor Table

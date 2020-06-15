@@ -13,9 +13,9 @@
 
 <script>
 // import views
-import studentView from "../components/studentView.vue";
-import profesorView from "../components/profesorView.vue";
-import adminView from "../components/adminView.vue";
+import studentView from "./studentView.vue";
+import profesorView from "./profesorView.vue";
+import adminView from "./adminView.vue";
 
 import { mapActions, mapGetters } from "vuex";
 export default {

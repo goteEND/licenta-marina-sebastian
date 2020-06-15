@@ -20,6 +20,17 @@
       class="elevation-1"
     >
     </v-data-table>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <download-excel
+        :data="excel_data"
+        :fields="excel_fields"
+        name="situatie.xls"
+        worksheet="situatie"
+      >
+        <v-btn color="primary">Generare situatie</v-btn>
+      </download-excel>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -30,6 +41,13 @@ export default {
   computed: mapGetters(["user"]),
   data() {
     return {
+      excel_fields: {
+        Nume: "name",
+        Titlu: "title",
+        An: "year",
+        Email: "email"
+      },
+      excel_data: [],
       loading: true,
       students: [],
       search: "",
@@ -43,8 +61,6 @@ export default {
         { text: "Titlu", value: "title" },
         { text: "An", value: "year" },
         { text: "Email", value: "email", sortable: false }
-        // { text: "Role", value: "role" },
-        // { text: "Email", value: "email" }
       ]
     };
   },
@@ -57,6 +73,7 @@ export default {
         .get(`api/profesorTable?prof=${this.user.name.replace(" ", "_")}`)
         .then(response => {
           this.students = response.data;
+          this.excel_data = response.data;
           this.loading = false;
         });
     }
