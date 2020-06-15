@@ -10,7 +10,20 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <adminTable />
+                <v-row align="center" justify="center">
+                  <v-col cols="4">
+                    <v-btn color="secondary" class="ma-2" @click="viewTable"
+                      >Situatie</v-btn
+                    >
+                    <v-btn color="secondary" class="ma-2" @click="viewEdit"
+                      >Editare Useri</v-btn
+                    >
+                  </v-col>
+                </v-row>
+                <v-row align="center" justify="center">
+                  <adminTable v-if="view === 'table'" />
+                  <adminEdit v-if="view === 'edit'" />
+                </v-row>
               </v-card-text>
             </v-card>
           </v-col>
@@ -22,13 +35,24 @@
 
 <script>
 import adminTable from "../components/adminTable.vue";
+import adminEdit from "../components/adminEdit.vue";
 import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  components: { adminTable },
+  components: { adminTable, adminEdit },
   computed: mapGetters(["user"]),
   data() {
-    return {};
+    return {
+      view: "edit"
+    };
+  },
+  methods: {
+    viewTable() {
+      this.view = "table";
+    },
+    viewEdit() {
+      this.view = "edit";
+    }
   }
 };
 </script>

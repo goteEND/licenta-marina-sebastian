@@ -79,37 +79,4 @@ router.post("/users", async (req, res) => {
   );
 });
 
-// Title Post
-
-router.get("/userChoice", async (req, res) => {
-  res.render("userChoice");
-  // await Post.find({}, (err, result) => {
-  //   if (err) {
-  //     res.send(err);
-  //   } else {
-  //     res.json(result);
-  //   }
-  // });
-});
-
-router.post("/userChoice", async (req, res) => {
-  const { _id, nume, profesor, anPrezentare, titluPrezentare } = req.body;
-  await Post.create(
-    {
-      idOfStudent: _id,
-      name: nume,
-      title: titluPrezentare,
-      year: anPrezentare,
-      profesor: profesor
-    },
-    function(err, result) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
-
 module.exports = router;
