@@ -43,7 +43,7 @@ export default {
   computed: mapGetters(["user"]),
   data() {
     return {
-      view: "edit"
+      view: "tabel"
     };
   },
   methods: {
