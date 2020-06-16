@@ -8,6 +8,7 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>{{ user.name }} - ADMIN</v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-btn color="secondary ">Logout</v-btn>
               </v-toolbar>
               <v-card-text>
                 <v-row align="center" justify="center">
