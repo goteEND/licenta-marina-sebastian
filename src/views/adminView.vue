@@ -12,7 +12,7 @@
               </v-toolbar>
               <v-card-text>
                 <v-row align="center" justify="center">
-                  <v-col cols="4">
+                  <v-col cols="4" align="center" justify="center">
                     <v-btn color="secondary" class="ma-2" @click="viewTable"
                       >Situatie</v-btn
                     >
@@ -22,8 +22,10 @@
                   </v-col>
                 </v-row>
                 <v-row align="center" justify="center">
-                  <adminTable v-if="view === 'table'" />
-                  <adminEdit v-if="view === 'edit'" />
+                  <v-col>
+                    <adminTable v-if="view === 'table'" />
+                    <adminEdit v-if="view === 'edit'" />
+                  </v-col>
                 </v-row>
               </v-card-text>
             </v-card>
@@ -44,7 +46,7 @@ export default {
   computed: mapGetters(["user"]),
   data() {
     return {
-      view: "tabel"
+      view: "edit"
     };
   },
   methods: {

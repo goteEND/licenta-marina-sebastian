@@ -58,8 +58,51 @@ router.get("/profesorTable", async (req, res) => {
   ).select("title year name email");
 });
 
-// Api Select Profesor Year and Title
+// ADMIN EDIT
 
+// Admin get
+router.get("/adminEdit", async (req, res) => {
+  await User.find({}, (err, result) => {
+    // console.log(err, result);
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  }).select("_id title year name profesor role");
+});
+
+// Admin post
+router.post("/adminEdit", async (req, res) => {
+  const { _id, name, profesor, title, year, role } = req.body;
+  await User.findByIdAndUpdate(
+    { _id: _id },
+    {
+      $set: { name, profesor, title, year, role }
+    },
+    { new: true },
+    function(err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// Admin delete
+router.delete("/adminEdit/:id", async (req, res) => {
+  await User.findByIdAndDelete({ _id: req.params.id }, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// Api Select Profesor Year and Title
 router.post("/users", async (req, res) => {
   const { _id, profesor, anPrezentare, titluPrezentare } = req.body;
 
