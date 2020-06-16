@@ -10,6 +10,15 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
+                <v-alert
+                  v-model="alert"
+                  dismissible
+                  dense
+                  outlined
+                  type="error"
+                >
+                  Acest email <strong>a mai fost inregistrat</strong>
+                </v-alert>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-text-field
                     label="Nume"
@@ -81,6 +90,7 @@ export default {
   props: ["msg"],
   data() {
     return {
+      alert: false,
       valid: true,
       name: "",
       nameRules: [v => !!v || "Camp obligatoriu"],
@@ -112,11 +122,15 @@ export default {
         confirm_password: this.confirm_password,
         name: this.name
       };
-      this.register(user).then(res => {
-        if (res.data.success) {
-          this.$router.push("login");
-        }
-      });
+      this.register(user)
+        .then(res => {
+          if (res.data.success) {
+            this.$router.push("login");
+          }
+        })
+        .catch(err => {
+          this.alert = true;
+        });
     }
   }
 };

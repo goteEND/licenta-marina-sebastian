@@ -8,15 +8,23 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>{{ user.name }} - ADMIN</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn color="secondary ">Logout</v-btn>
+                <v-btn color="secondary" @click="logoutUser">Logout</v-btn>
               </v-toolbar>
               <v-card-text>
                 <v-row align="center" justify="center">
                   <v-col cols="4" align="center" justify="center">
-                    <v-btn color="secondary" class="ma-2" @click="viewTable"
+                    <v-btn
+                      raised
+                      color="secondary"
+                      class="ma-2"
+                      @click="viewTable"
                       >Situatie</v-btn
                     >
-                    <v-btn color="secondary" class="ma-2" @click="viewEdit"
+                    <v-btn
+                      raised
+                      color="secondary"
+                      class="ma-2"
+                      @click="viewEdit"
                       >Editare Useri</v-btn
                     >
                   </v-col>
@@ -46,10 +54,14 @@ export default {
   computed: mapGetters(["user"]),
   data() {
     return {
-      view: "edit"
+      view: "table"
     };
   },
   methods: {
+    ...mapActions(["logout"]),
+    logoutUser() {
+      this.logout();
+    },
     viewTable() {
       this.view = "table";
     },

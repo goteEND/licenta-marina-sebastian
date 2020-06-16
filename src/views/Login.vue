@@ -10,6 +10,15 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
+                <v-alert
+                  v-model="alert"
+                  dismissible
+                  dense
+                  outlined
+                  type="error"
+                >
+                  Email sau parola <strong>incorecte</strong>
+                </v-alert>
                 <v-form ref="form" v-model="valid" lazy-validation>
                   <v-text-field
                     label="Email"
@@ -57,6 +66,7 @@ export default {
   props: ["msg"],
   data() {
     return {
+      alert: false,
       valid: true,
       email: "",
       emailRules: [
@@ -90,7 +100,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log(err);
+          this.alert = true;
         });
     }
   }

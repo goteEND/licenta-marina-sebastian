@@ -33,30 +33,53 @@ router.post("/register", (req, res) => {
       return res.status(400).json({
         msg: "Email is already registred. Did you forgot your password."
       });
-    }
-  });
-  // The data is valid and new we can register the user
-  let newUser = new User({
-    name,
-    password,
-    email,
-    profesor: " ",
-    title: " ",
-    year: " "
-  });
-  // Hash the password
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      if (err) throw err;
-      newUser.password = hash;
-      newUser.save().then(user => {
-        return res.status(201).json({
-          success: true,
-          msg: "Hurry! User is now registered."
+    } else {
+      // The data is valid and new we can register the user
+      let newUser = new User({
+        name,
+        password,
+        email,
+        profesor: " ",
+        title: " ",
+        year: " "
+      });
+      // Hash the password
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser.save().then(user => {
+            return res.status(201).json({
+              success: true,
+              msg: "Hurry! User is now registered."
+            });
+          });
         });
       });
-    });
+    }
   });
+  // // The data is valid and new we can register the user
+  // let newUser = new User({
+  //   name,
+  //   password,
+  //   email,
+  //   profesor: " ",
+  //   title: " ",
+  //   year: " "
+  // });
+  // // Hash the password
+  // bcrypt.genSalt(10, (err, salt) => {
+  //   bcrypt.hash(newUser.password, salt, (err, hash) => {
+  //     if (err) throw err;
+  //     newUser.password = hash;
+  //     newUser.save().then(user => {
+  //       return res.status(201).json({
+  //         success: true,
+  //         msg: "Hurry! User is now registered."
+  //       });
+  //     });
+  //   });
+  // });
 });
 
 /**

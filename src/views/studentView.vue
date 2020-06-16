@@ -9,11 +9,9 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>{{ user.name }}</v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-btn @click="logoutUser" color="secondary">Logout</v-btn>
               </v-toolbar>
               <v-card-text>
-                <!-- <h2 v-if="coordonator2 !== ''">
-                  Coordonatorul ales este {{ coordonator2 }}
-                </h2> -->
                 <v-form v-model="valid">
                   <v-container>
                     <v-row>
@@ -78,15 +76,6 @@
                   </v-container>
                 </v-form>
               </v-card-text>
-              <!-- <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                  :disabled="!valid"
-                  @click="postUserChoice"
-                  color="primary"
-                  >Post</v-btn
-                >
-              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
@@ -123,6 +112,10 @@ export default {
   }),
 
   methods: {
+    ...mapActions(["logout"]),
+    logoutUser() {
+      this.logout();
+    },
     postUserChoice() {
       axios.post("api/users", {
         _id: this.user._id,

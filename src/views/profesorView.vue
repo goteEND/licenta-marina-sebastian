@@ -8,6 +8,7 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>{{ user.name }}</v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-btn @click="logoutUser" color="secondary">Logout</v-btn>
               </v-toolbar>
               <v-card-text>
                 <profesorTable />
@@ -29,6 +30,12 @@ export default {
   computed: mapGetters(["user"]),
   data() {
     return {};
+  },
+  methods: {
+    ...mapActions(["logout"]),
+    logoutUser() {
+      this.logout();
+    }
   }
 };
 </script>
