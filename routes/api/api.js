@@ -101,10 +101,10 @@ router.delete("/adminEdit/:id", async (req, res) => {
   });
 });
 
-// GENERATE EXCEL
+// GENERATE EXCEL ADMIN
 
 // Name
-router.get("/generateExcelName", async (req, res) => {
+router.get("/generateExcelNameA", async (req, res) => {
   const src = req.query.src.replace("_", " ");
   await User.find(
     { role: "student", name: { $regex: src, $options: "i" } },
@@ -118,7 +118,7 @@ router.get("/generateExcelName", async (req, res) => {
   ).select("name title profesor year email");
 });
 // Title
-router.get("/generateExcelTitle", async (req, res) => {
+router.get("/generateExcelTitleA", async (req, res) => {
   const src = req.query.src.replace("_", " ");
   await User.find(
     { role: "student", title: { $regex: src, $options: "i" } },
@@ -132,7 +132,7 @@ router.get("/generateExcelTitle", async (req, res) => {
   ).select("name title profesor year email");
 });
 // Profesor
-router.get("/generateExcelProfesor", async (req, res) => {
+router.get("/generateExcelProfesorA", async (req, res) => {
   const src = req.query.src.replace("_", " ");
   await User.find(
     { role: "student", profesor: { $regex: src, $options: "i" } },
@@ -146,7 +146,7 @@ router.get("/generateExcelProfesor", async (req, res) => {
   ).select("name title profesor year email");
 });
 // Year
-router.get("/generateExcelYear", async (req, res) => {
+router.get("/generateExcelYearA", async (req, res) => {
   const src = req.query.src.replace("_", " ");
   await User.find(
     { role: "student", year: { $regex: src, $options: "i" } },
@@ -160,7 +160,7 @@ router.get("/generateExcelYear", async (req, res) => {
   ).select("name title profesor year email");
 });
 // Email
-router.get("/generateExcelEmail", async (req, res) => {
+router.get("/generateExcelEmailA", async (req, res) => {
   const src = req.query.src.replace("_", " ");
   await User.find(
     { role: "student", email: { $regex: src, $options: "i" } },
@@ -173,27 +173,68 @@ router.get("/generateExcelEmail", async (req, res) => {
     }
   ).select("name title profesor year email");
 });
-// router.get("/generateExcelAdmin", async (req, res) => {
-//   console.log(req.query.src);
-//   const src = req.query.src.replace("_", " ");
-//   console.log(src);
-//   await User.find(
-//     {
-//       role: "student",
-//       name: src,
-//       title: src,
-//       profesor: src,
-//       year: src,
-//       email: src
-//     },
-//     (err, result) => {
-//       if (err) {
-//         res.send(err);
-//       } else {
-//         res.json(result);
-//       }
-//     }
-//   ).select("name title profesor year email");
-// });
+
+// GENERATE EXCEL Profesor
+
+// Name
+router.get("/generateExcelNameP", async (req, res) => {
+  const src = req.query.src.replace("_", " ");
+  const prof = req.query.prof.replace("_", " ");
+  await User.find(
+    { role: "student", profesor: prof, name: { $regex: src, $options: "i" } },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    }
+  ).select("name title year email");
+});
+// Title
+router.get("/generateExcelTitleP", async (req, res) => {
+  const src = req.query.src.replace("_", " ");
+  const prof = req.query.prof.replace("_", " ");
+  await User.find(
+    { role: "student", profesor: prof, title: { $regex: src, $options: "i" } },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    }
+  ).select("name title year email");
+});
+// Year
+router.get("/generateExcelYearP", async (req, res) => {
+  const src = req.query.src.replace("_", " ");
+  const prof = req.query.prof.replace("_", " ");
+  await User.find(
+    { role: "student", profesor: prof, year: { $regex: src, $options: "i" } },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    }
+  ).select("name title year email");
+});
+// Email
+router.get("/generateExcelEmailP", async (req, res) => {
+  const src = req.query.src.replace("_", " ");
+  const prof = req.query.prof.replace("_", " ");
+  await User.find(
+    { role: "student", profesor: prof, email: { $regex: src, $options: "i" } },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    }
+  ).select("name title year email");
+});
 
 module.exports = router;

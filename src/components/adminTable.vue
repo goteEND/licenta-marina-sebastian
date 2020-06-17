@@ -96,19 +96,19 @@ export default {
     },
     async fetchExcel() {
       const response1 = await axios.get(
-        `api/generateExcelName?src=${this.search.replace(" ", "_")}`
+        `api/generateExcelNameA?src=${this.search.replace(" ", "_")}`
       );
       const response2 = await axios.get(
-        `api/generateExcelTitle?src=${this.search.replace(" ", "_")}`
+        `api/generateExcelTitleA?src=${this.search.replace(" ", "_")}`
       );
       const response3 = await axios.get(
-        `api/generateExcelProfesor?src=${this.search.replace(" ", "_")}`
+        `api/generateExcelProfesorA?src=${this.search.replace(" ", "_")}`
       );
       const response4 = await axios.get(
-        `api/generateExcelYear?src=${this.search.replace(" ", "_")}`
+        `api/generateExcelYearA?src=${this.search.replace(" ", "_")}`
       );
       const response5 = await axios.get(
-        `api/generateExcelEmail?src=${this.search.replace(" ", "_")}`
+        `api/generateExcelEmailA?src=${this.search.replace(" ", "_")}`
       );
       let response = [];
       if (response1.data.length > 0) {
