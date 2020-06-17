@@ -40,7 +40,8 @@ app.use(bodyParser.json());
 const users = require("./routes/api/users");
 app.use("/api/users", users);
 
-app.use("/api", require("./routes/api/api"));
+const api = require("./routes/api/api");
+app.use("/api", api);
 
 app.use("/dist", express.static(process.cwd() + "/dist"));
 
