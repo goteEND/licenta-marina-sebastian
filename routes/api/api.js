@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const User = require("../../model/User");
-const Post = require("../../model/Post");
 
 // Api Get Users
 router.get("/users", async (req, res) => {
