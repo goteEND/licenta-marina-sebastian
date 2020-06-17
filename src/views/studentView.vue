@@ -9,7 +9,7 @@
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>{{ user.name }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn @click="logoutUser" color="secondary">Logout</v-btn>
+                <v-btn @click="logoutUser" color="secondary">Deconectare</v-btn>
               </v-toolbar>
               <v-card-text>
                 <v-form v-model="valid">
