@@ -2,7 +2,6 @@
   <v-app id="dashboard">
     <v-content>
       <div v-if="user">
-        <!-- <v-btn @click.prevent="logoutUser">Logout</v-btn> -->
         <studentView v-if="user.role === 'student'" />
         <profesorView v-if="user.role === 'profesor'" />
         <adminView v-if="user.role === 'admin'" />
@@ -27,11 +26,11 @@ export default {
     ...mapActions(["logout"]),
     logoutUser() {
       this.logout();
-    }
+    },
   },
   created() {
     this.getProfile();
-  }
+  },
 };
 </script>
 
