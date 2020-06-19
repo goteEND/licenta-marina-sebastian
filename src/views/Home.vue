@@ -13,16 +13,16 @@
               </v-toolbar>
               <v-img
                 alt="logo"
-                src="https://madewithvuejs.com/mandant/madewithvuejs/images/logo-vuetify.png"
+                src="https://image.flaticon.com/icons/png/512/2231/2231649.png"
                 class="ma-4"
               ></v-img>
               <div class="text-center py-2">
-                <v-btn large href="/login" color="primary" class="ma-2"
-                  >Autentificare</v-btn
-                >
-                <v-btn large href="/register" color="secondary" class="ma-2"
-                  >Inregistrare</v-btn
-                >
+                <v-btn large href="/login" color="primary" class="ma-2">
+                  Autentificare
+                </v-btn>
+                <v-btn large href="/register" color="secondary" class="ma-2">
+                  Inregistrare
+                </v-btn>
               </div>
             </v-card>
           </v-col>
