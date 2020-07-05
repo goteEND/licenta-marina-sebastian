@@ -16,22 +16,22 @@ router.post("/register", (req, res) => {
   // Min Password
   if (password.length < 8) {
     return res.status(400).json({
-      msg: "Password too short"
+      msg: "Password too short",
     });
   }
   // Match Passwords
   if (password !== confirm_password) {
     return res.status(400).json({
-      msg: "Password do not match."
+      msg: "Passwords do not match",
     });
   }
   // Check for the Unique Email
   User.findOne({
-    email: email
-  }).then(user => {
+    email: email,
+  }).then((user) => {
     if (user) {
       return res.status(400).json({
-        msg: "Email is already registred. Did you forgot your password."
+        msg: "Email is already registred",
       });
     } else {
       // The data is valid and new we can register the user
@@ -41,17 +41,17 @@ router.post("/register", (req, res) => {
         email,
         profesor: " ",
         title: " ",
-        year: " "
+        year: " ",
       });
       // Hash the password
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser.save().then(user => {
+          newUser.save().then((user) => {
             return res.status(201).json({
               success: true,
-              msg: "Hurry! User is now registered."
+              msg: "User is now registered",
             });
           });
         });
@@ -89,16 +89,16 @@ router.post("/register", (req, res) => {
  */
 router.post("/login", (req, res) => {
   User.findOne({
-    email: req.body.email
-  }).then(user => {
+    email: req.body.email,
+  }).then((user) => {
     if (!user) {
       return res.status(404).json({
         msg: "Email is not found.",
-        success: false
+        success: false,
       });
     }
     // If there is user we are now going to compare the password
-    bcrypt.compare(req.body.password, user.password).then(isMatch => {
+    bcrypt.compare(req.body.password, user.password).then((isMatch) => {
       if (isMatch) {
         // User's password is correct and we need to send the JSON Token for that user
 
@@ -109,27 +109,27 @@ router.post("/login", (req, res) => {
           role: user.role,
           profesor: user.profesor,
           title: user.title,
-          year: user.year
+          year: user.year,
         };
         jwt.sign(
           payload,
           process.env.SECRET,
           {
-            expiresIn: 60 * 60 * 12
+            expiresIn: 60 * 60 * 12,
           },
           (err, token) => {
             res.status(200).json({
               success: true,
               token: `Bearer ${token}`,
               user: user,
-              msg: "You are now logged in."
+              msg: "You are now logged in.",
             });
           }
         );
       } else {
         return res.status(404).json({
           msg: "Incorrect password.",
-          success: false
+          success: false,
         });
       }
     });
@@ -144,11 +144,11 @@ router.post("/login", (req, res) => {
 router.get(
   "/profile",
   passport.authenticate("jwt", {
-    session: false
+    session: false,
   }),
   (req, res) => {
     return res.json({
-      user: req.user
+      user: req.user,
     });
   }
 );
